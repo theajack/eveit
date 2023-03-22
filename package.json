@@ -1,8 +1,8 @@
 {
-    "name": "ebuild-rollup",
-    "version": "1.0.1",
-    "description": "eveit",
-    "repository": "git@github.com:theajack/ebuild-template-rollup.git",
+    "name": "eveit",
+    "version": "0.0.1",
+    "description": "Event-emitter with strong support for type hints",
+    "repository": "git@github.com:theajack/eveit.git",
     "author": "tackchen <theajack@qq.com>",
     "main": "eveit.min.js",
     "unpkg": "eveit.min.js",
@@ -18,12 +18,12 @@
         "release": "node scripts/push-release.js",
         "publish": "node scripts/publish.js"
     },
-    "keywords": [],
+    "keywords": ["event-emitter"],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/theajack/ebuild-template-rollup/issues"
+        "url": "https://github.com/theajack/eveit/issues"
     },
-    "homepage": "https://shiyix.cn/jsbox/?github=theajack.ebuild-template-rollup",
+    "homepage": "https://shiyix.cn/jsbox/?github=theajack.eveit",
     "devDependencies": {
         "@babel/core": "^7.18.5",
         "@babel/preset-env": "^7.18.2",

@@ -24,7 +24,7 @@ function buildBaseConfig ({
         bundle: true,
         sourcemap: true,
         format: 'cjs',
-        globalName: 'EbuildDemo',
+        globalName: 'Eveit',
         platform: 'browser',
         // plugins:
         //   format === 'cjs' || pkg.buildOptions?.enableNonBrowserBranches

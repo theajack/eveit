@@ -41,7 +41,7 @@ async function build ({
     output = resolveRootPath('npm/eveit.min.js'),
     format = 'umd',
     external = packageInfo.external,
-    name = 'EbuildDemo',
+    name = 'Eveit',
 } = {}) {
     const inputOptions = {
         input: transfromFilePath(input), // 唯一必填参数
