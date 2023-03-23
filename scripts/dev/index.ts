@@ -4,7 +4,7 @@
  * @Description: Coding something
  */
 
-import Eveit from '../../src/index';
+import Eveit from '../../src';
 
 const win = (window as any);
 
@@ -52,3 +52,11 @@ Eveit.bind(a);
 
 Eveit.emit('hello', 'hi');
 Eveit.on('hello', (v) => {console.log(v);});
+
+// declare module '../../npm' {
+//     export interface IGlobalType {
+//         aa: [string],
+//     }
+// }
+
+// Eveit._.on('aa');

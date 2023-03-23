@@ -18,7 +18,9 @@
         "release": "node scripts/push-release.js",
         "publish": "node scripts/publish.js"
     },
-    "keywords": ["event-emitter"],
+    "keywords": [
+        "event-emitter"
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/theajack/eveit/issues"

@@ -5,4 +5,6 @@
  */
 import {Eveit} from './eveit';
 
+// export {IGlobalType} from './eveit';
+
 export default Eveit;
