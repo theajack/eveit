@@ -137,3 +137,12 @@ e.on('hello', (v) => {console.log(v);}); // 不会触发 hello
 ```js
 Eveit._.usePrevEmit = true;
 ```
+
+### 2.7 onWait
+
+```js
+Eveit.onWait('xx').then();
+
+const e = new Eveit();
+e.onWait('xx').then();
+```

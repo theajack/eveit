@@ -24,7 +24,7 @@ npm i eveit
 eveit.on('hello', (v) => {
      console.log('Say ' + v);
 });
-eveit. emit('hello', 'Hi');
+eveit.emit('hello', 'Hi');
 ```
 
 ### 2.2 ts type support
@@ -53,7 +53,7 @@ const e = new Eveit();
 e.on('hello', (v) => {
      console.log('Say ' + v);
 });
-e. emit('hello', 'Hi');
+e.emit('hello', 'Hi');
 ```
 
 ### 2.3 Inheritance use
@@ -62,7 +62,7 @@ e. emit('hello', 'Hi');
 class Test extends Eveit {
      test () {
          this.on('hello', () => {console.log('hello');});
-         this. emit('hello');
+         this.emit('hello');
      }
 }
 ```
@@ -84,7 +84,7 @@ class Test extends Eveit<{
 const a = {};
 Eveit. bind(a);
 a.on('hello', () => {console.log('hello');});
-a. emit('hello');
+a.emit('hello');
 ```
 
 binding + generics
@@ -96,7 +96,7 @@ const a: Eveit<{aa: [string]}> & {
 };
 Eveit. bind(a);
 a.on('aa', (v) => {console.log('hello', v);});
-a. emit('aa');
+a.emit('aa');
 ```
 
 ### 2.5 head,once,off,clear
@@ -118,7 +118,7 @@ global open
 
 ```js
 Eveit.usePrevEmit = true;
-Eveit. emit('hello', 'hi');
+Eveit.emit('hello', 'hi');
 Eveit.on('hello', (v) => {console.log(v);});
 ```
 
@@ -127,7 +127,7 @@ turn on or off for an object
 ```js
 const e = new Eveit();
 e.usePrevEmit = false;
-e. emit('hello', 'hi');
+e.emit('hello', 'hi');
 e.on('hello', (v) => {console.log(v);}); // will not trigger hello
 ```
 
@@ -135,4 +135,13 @@ If you only want to trigger on static calls, you can write like this
 
 ```js
 Eveit._.usePrevEmit = true;
+```
+
+### 2.7 onWait
+
+```js
+Eveit.onWait('xx').then();
+
+const e = new Eveit();
+e.onWait('xx').then();
 ```

@@ -1,6 +1,6 @@
 {
     "name": "eveit",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Event-emitter with strong support for type hints",
     "repository": "git@github.com:theajack/eveit.git",
     "author": "tackchen <theajack@qq.com>",
