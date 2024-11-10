@@ -140,8 +140,8 @@ Eveit._.usePrevEmit = true;
 ### 2.7 onWait
 
 ```js
-Eveit.onWait('xx').then();
+Eveit.onWait('xxx').then();
 
 const e = new Eveit();
-e.onWait('xx').then();
+e.onWait('xxx').then();
 ```
