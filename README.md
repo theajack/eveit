@@ -21,10 +21,11 @@ npm i eveit
 ### 2.1 Basic use (static call)
 
 ```js
-eveit.on('hello', (v) => {
+import Eveit from 'eveit';
+Eveit.on('hello', (v) => {
      console.log('Say ' + v);
 });
-eveit.emit('hello', 'Hi');
+Eveit.emit('hello', 'Hi');
 ```
 
 ### 2.2 ts type support
@@ -82,7 +83,7 @@ class Test extends Eveit<{
 
 ```js
 const a = {};
-Eveit. bind(a);
+Eveit.bind(a);
 a.on('hello', () => {console.log('hello');});
 a.emit('hello');
 ```
@@ -94,7 +95,7 @@ const a: Eveit<{aa: [string]}> & {
      [prop: string]: any;
 } = {
 };
-Eveit. bind(a);
+Eveit.bind(a);
 a.on('aa', (v) => {console.log('hello', v);});
 a.emit('aa');
 ```
@@ -106,7 +107,7 @@ const e = new Eveit();
 e.once('hello', (v) => {console.log('once', v);}); // Only trigger once
 e.head('hello', (v) => {console.log('head', v);}); // Put the event in the head
 e.headOnce('hello', (v) => {console.log('head', v);}); // combine the above two
-const handler = (v) => {console. log(v);}
+const handler = (v) => {console.log(v);}
 e.on('hello', handler);
 e.off('hello', handler); // Remove a single event listener
 e.clear('hello'); // Remove all listeners for the entire event
@@ -144,51 +145,4 @@ Eveit.onWait('xxx').then();
 
 const e = new Eveit();
 e.onWait('xxx').then();
-```
-
-### 2.8 Use MessageChannel for cross-worker communication
-
-#### 2.8.1 Basic usage
-
-In worker (worker.js)
-
-```js
-import {MCEveit} from 'eveit';
-
-async function workerMain () {
-     const e = await MCEveit.copy();
-     e.on('test', (v) => {console.log('Worker receive', v);});
-     e.emit('test', 'worker data');
-}
-workerMain();
-```
-
-Main thread
-
-```js
-import {MCEveit} from 'eveit';
-
-const e = new MCEveit();
-
-const worker = new Worker('worker.js'); // Fill in the real worker or use vite import syntax to import the worker
-e.into(worker)
-
-e.on('test', (v) => {console.log('Main receive', v);});
-e.emit('test', 'main data');
-```
-
-#### 2.8.1 Advanced Use
-
-In worker (worker.js)
-
-```js
-// id can be agreed upon or passed using worker message
-const e = await MCEveit.copy(id);
-
-e.emitTransfer('test', {
-     data: [{
-          stream: readableStream, // Transferable to be transferred
-     }],
-     transfer: [readableStream]
-})
 ```
