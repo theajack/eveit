@@ -145,3 +145,50 @@ Eveit.onWait('xxx').then();
 const e = new Eveit();
 e.onWait('xxx').then();
 ```
+
+### 2.8 Use MessageChannel for cross-worker communication
+
+#### 2.8.1 Basic usage
+
+In worker (worker.js)
+
+```js
+import {MCEveit} from 'eveit';
+
+async function workerMain () {
+     const e = await MCEveit.copy();
+     e.on('test', (v) => {console.log('Worker receive', v);});
+     e.emit('test', 'worker data');
+}
+workerMain();
+```
+
+Main thread
+
+```js
+import {MCEveit} from 'eveit';
+
+const e = new MCEveit();
+
+const worker = new Worker('worker.js'); // Fill in the real worker or use vite import syntax to import the worker
+e.into(worker)
+
+e.on('test', (v) => {console.log('Main receive', v);});
+e.emit('test', 'main data');
+```
+
+#### 2.8.1 Advanced Use
+
+In worker (worker.js)
+
+```js
+// id can be agreed upon or passed using worker message
+const e = await MCEveit.copy(id);
+
+e.emitTransfer('test', {
+     data: [{
+          stream: readableStream, // Transferable to be transferred
+     }],
+     transfer: [readableStream]
+})
+```

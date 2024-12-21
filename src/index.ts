@@ -4,4 +4,5 @@
  * @Description: Coding something
  */
 import {Eveit} from './eveit';
+export {Eveit, type IJson} from './eveit';
 export default Eveit;

@@ -6,9 +6,7 @@
 
 import version from './version';
 
-type IJson<T> = {
-    [prop in string]: T
-}
+export type IJson<T> = Record<any, T>;
 
 export type EmptyPayload = [];
 export type AnyPayload = [any];
@@ -24,20 +22,18 @@ export type IListener<K extends Array<any> = any[]> = ((...args: K) => void) | I
 // export interface IEventBaseMap {[prop: string]: any[]}
 // export type IEventBaseMap = Record<any, any>
 
-declare interface IGlobalType extends IJson<any[]>{};
-
 export class Eveit<
     EventMap extends IJson<any> = IJson<any>,
 > {
     static version = version;
     private static __: Eveit;
-    static get _(){
-        if(!this.__) this.__ = new Eveit();
+    static get _ () {
+        if (!this.__) this.__ = new Eveit();
         return this.__;
     }
 
-    static get usePrevEmit(){return this._.usePrevEmit;}
-    static set usePrevEmit(v: boolean){this._.usePrevEmit = v}
+    static get usePrevEmit () {return this._.usePrevEmit;}
+    static set usePrevEmit (v: boolean) {this._.usePrevEmit = v;}
     static emit (name: string, ...args: any[]) {this._.emit(name, ...args);}
     static off (name: string, listener: IListener) {this._.off(name, listener);}
     static clear (name: string) {this._.clear(name);}
@@ -79,7 +75,7 @@ export class Eveit<
 
     private _formatTarget (fn: IListener, once?: boolean): IEventObject {
         if (typeof fn === 'function') {
-            return { listener: fn, once: once ?? false, prev: this.usePrevEmit };
+            return {listener: fn, once: once ?? false, prev: this.usePrevEmit};
         }
         if (typeof once === 'boolean') {fn.once = once;}
         return fn;
@@ -115,7 +111,7 @@ export class Eveit<
     }
 
     onWait <Key extends keyof EventMap> (name: Key, options?: Omit<IEventObject, 'listener'>): Promise<EventMap[Key]> {
-        return new Promise<EventMap[Key]>((resolve, reject) => {
+        return new Promise<EventMap[Key]>((resolve) => {
             // @ts-ignore
             let target: IListener = (...args) => resolve(args);
             if (options) {
@@ -126,7 +122,7 @@ export class Eveit<
             }
             // @ts-ignore
             this.once(name, target);
-        })
+        });
     }
 
     destroy () {
@@ -150,7 +146,7 @@ export class Eveit<
         if (this._checkPrev(name, item) && item.once) {
             return () => {};
         }
-        this._getList(name).unshift(fn);
+        this._getList(name).unshift(item);
         return () => {this.off(name, fn);};
     }
     headOnce <Key extends keyof EventMap> (name: Key, fn: IListener<EventMap[Key]>) {
