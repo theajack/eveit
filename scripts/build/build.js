@@ -5,24 +5,27 @@
  */
 
 const {
-    copyFile, buildPackageJson, writeJsonIntoFile,
+    copyFile, buildPackageJson,
     writeFile,
+    resolveRootPath,
 } = require('../utils');
 const pkg = require('../../package.json');
 const {build, builddts} = require('../rollup.base');
 
-
 async function main () {
-    const version = process.argv[2];
-    if (!version) throw new Error('Invalid version');
-    pkg.version = version;
-    writeJsonIntoFile('@package.json', pkg);
-
-    writeFile('@src/version.ts', `export default '${pkg.version}';`);
-    await build();
-    await builddts();
-    buildPackageJson();
-    copyFiles();
+    const iife = process.argv[2] === 'iife';
+    if (iife) {
+        await build({
+            input: resolveRootPath('src/iife.ts'),
+            output: resolveRootPath('npm/eveit.iife.js'),
+        });
+    } else {
+        writeFile('@src/version.ts', `export default '${pkg.version}';`);
+        await build();
+        await builddts();
+        buildPackageJson();
+        copyFiles();
+    }
 }
 
 
